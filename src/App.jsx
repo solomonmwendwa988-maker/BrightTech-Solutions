@@ -1,7 +1,7 @@
 import Home from './pages/Home.jsx';
 import './App.css';
 import { useEffect } from 'react';
-import { Analytics } from "@vercel/analytics/next";
+
 
 function App() {
   useEffect(() => {

@@ -18,7 +18,7 @@ function About() {
           <div className="about-image-wrapper" id="aboutImg">
             <img
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
-              alt="BrightTech Solutions team meeting and collaboration"
+              alt="BrightTech Solutions team collaboration and meeting"
               loading="lazy"
               className={imageLoaded ? 'loaded' : ''}
               onLoad={() => setImageLoaded(true)}
@@ -121,19 +121,19 @@ function About() {
 
         <div className="stats-grid">
           <div className="stat-card">
-            <span className="stat-number">10+</span>
-            <p>Years Experience</p>
+            <span className="stat-number">5+</span>
+            <p>Projects Delivered</p>
           </div>
           <div className="stat-card">
-            <span className="stat-number">250+</span>
-            <p>Projects Completed</p>
+            <span className="stat-number">3+</span>
+            <p>Combined Years of Experience</p>
           </div>
           <div className="stat-card">
-            <span className="stat-number">120+</span>
-            <p>Happy Clients</p>
+            <span className="stat-number">24/7</span>
+            <p>Support</p>
           </div>
           <div className="stat-card">
-            <span className="stat-number">15+</span>
+            <span className="stat-number">5+</span>
             <p>Team Members</p>
           </div>
         </div>

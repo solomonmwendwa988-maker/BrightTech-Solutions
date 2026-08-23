@@ -6,6 +6,8 @@ import About from './About.jsx';
 import Projects from './Projects.jsx';
 import Footer from '../components/Footer.jsx';
 import Contact from './Contact.jsx';
+import Blog from './Blog.jsx';
+import Newsletter from './Newsletter.jsx';
 import homeImage from '../assets/images/home.jpeg';
 
 function Home() {
@@ -36,7 +38,7 @@ function Home() {
           <ul className="tick-list">
             <li>Experienced &amp; Professional Team</li>
             <li>High-Quality &amp; Scalable Solutions</li>
-            <li>On-Time Delivery &amp; 24/7 Support</li>
+            <li>On-Time Delivery &amp; Dedicated Support</li>
             <li>Proven Track Record of Success</li>
           </ul>
           <button className="btn-primary" onClick={() => handleScrollTo('about')}>
@@ -47,7 +49,7 @@ function Home() {
         <div className="choose-us-image">
           <img
             src={homeImage}
-            alt="BrightTech Solutions Team"
+            alt="BrightTech Solutions team collaborating on a project"
             loading="lazy"
             className={imageLoaded ? 'loaded' : ''}
             onLoad={() => setImageLoaded(true)}
@@ -58,10 +60,12 @@ function Home() {
       <Services />
       <Projects />
       <About />
+      <Blog />
+      <Newsletter />
       <Contact />
       <Footer />
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp Button - Updated with realistic availability */}
       <a
         href="https://wa.me/254713125845"
         target="_blank"
@@ -76,7 +80,7 @@ function Home() {
         </span>
         <span className="whatsapp-text">
           Chat with us
-          <small>Available 24/7</small>
+          <small>Mon-Fri 8AM-6PM EAT</small>
         </span>
       </a>
     </>

@@ -52,6 +52,8 @@ function Nav() {
     { id: 'services', label: 'Services' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
+    { id: 'blog', label: 'Blog' }, // Add this
+    { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (e, id) => {

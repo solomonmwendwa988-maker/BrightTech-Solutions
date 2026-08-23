@@ -28,18 +28,18 @@ function Hero() {
         </p>
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="stat-number">$100k+</span>
-            <span className="stat-label">Revenue Generated</span>
+            <span className="stat-number">5+</span>
+            <span className="stat-label">Projects Delivered</span>
           </div>
           <div className="hero-stat-divider"></div>
           <div className="hero-stat">
-            <span className="stat-number">98%</span>
-            <span className="stat-label">Client Retention</span>
+            <span className="stat-number">3+</span>
+            <span className="stat-label">Combined Years of Experience</span>
           </div>
           <div className="hero-stat-divider"></div>
           <div className="hero-stat">
-            <span className="stat-number">4.9★</span>
-            <span className="stat-label">Average Rating</span>
+            <span className="stat-number">24/7</span>
+            <span className="stat-label">Support</span>
           </div>
         </div>
         <div className="heroSection-buttons">
@@ -61,23 +61,23 @@ function Hero() {
           onLoad={() => setImageLoaded(true)}
         />
         <div className="hero-image-badge">
-          <span className="badge-icon">🏆</span>
+          <span className="badge-icon"></span>
           <span className="badge-text">Top Tech Company 2026</span>
         </div>
       </div>
 
       <div className="quick-data">
         <div className="quick-data-section">
-          <span>10+</span>
-          <p>Years of Experience</p>
+          <span>5+</span>
+          <p>Projects Delivered</p>
         </div>
         <div className="quick-data-section">
-          <span>250+</span>
-          <p>Projects Completed</p>
+          <span>3+</span>
+          <p>Combined Years of Experience</p>
         </div>
         <div className="quick-data-section">
-          <span>98%</span>
-          <p>Client Satisfaction</p>
+          <span>24/7</span>
+          <p>Support</p>
         </div>
       </div>
     </section>

@@ -6,6 +6,9 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    service: '',
+    budget: '',
     subject: '',
     message: '',
   });
@@ -15,32 +18,68 @@ function Contact() {
   const [sendError, setSendError] = useState('');
 
   // ============================================================
-  // 🔥 REPLACE THESE WITH YOUR ACTUAL CREDENTIALS
-  // They look like: service_xxxxxx, template_xxxxxx, etc.
+  // YOUR EMAILJS CREDENTIALS
   // ============================================================
-  const EMAILJS_SERVICE_ID = 'service_duir4bv';  // ← YOUR SERVICE ID
-  const EMAILJS_TEMPLATE_ID = 'template_13l2z0n';   // ← YOUR TEMPLATE ID
-  const EMAILJS_PUBLIC_KEY = '_q15TJML_aXifgw8D'; // ← YOUR PUBLIC KEY
+  const EMAILJS_SERVICE_ID = 'service_vi1ebq8';
+  const EMAILJS_AUTO_REPLY_TEMPLATE = 'template_1d2jq8l';      // Auto-reply to client
+  const EMAILJS_ADMIN_TEMPLATE = 'template_qabttpj';     // Admin notification
+  const EMAILJS_PUBLIC_KEY = 'FhqqTT9yKQ5GhVBdZ';
 
-  // Validate form fields
+  const ADMIN_EMAIL = 'brighttechsolutionssupport@gmail.com';
+
+  // Service options
+  const serviceOptions = [
+    { value: '', label: 'Select a service...' },
+    { value: 'web-development', label: 'Web Development' },
+    { value: 'mobile-app', label: 'Mobile App Development' },
+    { value: 'digital-marketing', label: 'Digital Marketing' },
+    { value: 'ui-ux-design', label: 'UI/UX Design' },
+    { value: 'seo-analytics', label: 'SEO & Analytics' },
+    { value: 'other', label: 'Other' },
+  ];
+
+  // Budget options
+  const budgetOptions = [
+    { value: '', label: 'Select a budget range...' },
+    { value: 'under-5k', label: 'Under Ksh5,000' },
+    { value: '5k-10k', label: 'Ksh5,000 - Ksh10,000' },
+    { value: '10k-25k', label: 'Ksh10,000 - Ksh25,000' },
+    { value: '25k-50k', label: 'Ksh25,000 - Ksh50,000' },
+    { value: '50k-plus', label: 'Ksh50,000+' },
+    { value: 'not-sure', label: 'Not sure yet' },
+  ];
+
+  const getServiceLabel = (value) => {
+    const found = serviceOptions.find(s => s.value === value);
+    return found ? found.label : value;
+  };
+
+  const getBudgetLabel = (value) => {
+    const found = budgetOptions.find(b => b.value === value);
+    return found ? found.label : value;
+  };
+
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = '*Name is required';
-    if (!formData.email.trim()) newErrors.email = '*Email is required';
+    if (!formData.name.trim()) newErrors.name = 'Full name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = 'Please enter a valid email';
-    if (!formData.message.trim()) newErrors.message = '*Message is required';
+      newErrors.email = 'Please enter a valid email address';
+    if (formData.phone && !/^[\+\d\s\-()]{7,20}$/.test(formData.phone))
+      newErrors.phone = 'Please enter a valid phone number';
+    if (!formData.service) newErrors.service = 'Please select a service';
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (formData.message.trim().length < 10)
+      newErrors.message = 'Message must be at least 10 characters';
     return newErrors;
   };
 
-  // Handle typing in form fields
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [id]: value,
     }));
-    // Clear error when user types
     if (errors[id]) {
       setErrors((prev) => ({
         ...prev,
@@ -49,62 +88,109 @@ function Contact() {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Stop page refresh
+    e.preventDefault();
     
-    // Validate form
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      const firstError = document.querySelector('.error');
+      if (firstError) {
+        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
       return;
     }
 
-    setIsSending(true); // Show spinner
-    setSendError(''); // Clear previous errors
+    setIsSending(true);
+    setSendError('');
 
     try {
-      // Prepare the data to send
-      const templateParams = {
+      const serviceLabel = getServiceLabel(formData.service);
+      const budgetLabel = getBudgetLabel(formData.budget);
+      const currentDate = new Date().toLocaleString();
+
+      // ============================================================
+      // STEP 1: Send Auto-Reply to Client
+      // ============================================================
+      const autoReplyParams = {
+        to_email: formData.email,
         from_name: formData.name,
         from_email: formData.email,
-        subject: formData.subject || 'New Contact Form Submission',
-        message: formData.message,
-        to_email: 'cipherghost68@gmail.com', // Your email
+        from_phone: formData.phone || 'Not provided',
+        service: serviceLabel,
+        budget: budgetLabel || 'Not specified',
+        subject: formData.subject || `New Inquiry: ${serviceLabel}`,
+        reply_to: ADMIN_EMAIL,
       };
 
-      console.log('Sending email...', templateParams);
+      console.log('Sending auto-reply to client...', autoReplyParams);
 
-      // Send the email using EmailJS
-      const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,   // Your Service ID
-        EMAILJS_TEMPLATE_ID,  // Your Template ID
-        templateParams,       // The data
-        EMAILJS_PUBLIC_KEY    // Your Public Key
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_AUTO_REPLY_TEMPLATE,
+        autoReplyParams,
+        EMAILJS_PUBLIC_KEY
       );
 
-      console.log('Email sent successfully!', response);
-      
-      // Show success message
+      console.log('Auto-reply sent to client!');
+
+      // ============================================================
+      // STEP 2: Send Admin Notification to You
+      // ============================================================
+      const adminParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        from_phone: formData.phone || 'Not provided',
+        service: serviceLabel,
+        budget: budgetLabel || 'Not specified',
+        subject: formData.subject || `New Inquiry: ${serviceLabel}`,
+        message: formData.message,
+        date: currentDate,
+        to_email: ADMIN_EMAIL,
+      };
+
+      console.log('Sending admin notification...', adminParams);
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_ADMIN_TEMPLATE,
+        adminParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      console.log('Admin notification sent!');
+
+      // Both emails sent successfully
       setSubmitted(true);
-      
-      // Clear the form
       setFormData({
         name: '',
         email: '',
+        phone: '',
+        service: '',
+        budget: '',
         subject: '',
         message: '',
       });
 
-      // Reset after 4 seconds
       setTimeout(() => {
         setSubmitted(false);
         setIsSending(false);
-      }, 4000);
+      }, 5000);
 
     } catch (error) {
       console.error('Email send error:', error);
-      setSendError('❌ Failed to send message. Please try again or contact us directly.');
+      console.error('Error text:', error.text);
+      console.error('Error status:', error.status);
+      
+      if (error.status === 400) {
+        setSendError('Template error. Please check your EmailJS template setup.');
+      } else if (error.status === 404) {
+        setSendError('Service or template not found. Please check your EmailJS credentials.');
+      } else if (error.status === 403) {
+        setSendError('Authentication error. Please check your EmailJS public key.');
+      } else {
+        setSendError('Failed to send message. Please try again or contact us directly at +254 713 125 845');
+      }
       setIsSending(false);
     }
   };
@@ -117,7 +203,7 @@ function Contact() {
           Get in <span>Touch</span>
         </h2>
         <p className="section-subtitle">
-          We'd love to hear from you. Reach out using the contact details below.
+          We'd love to hear from you. Reach out using the contact details below or fill out the form.
         </p>
       </div>
 
@@ -145,7 +231,7 @@ function Contact() {
               </div>
               <div>
                 <p className="label">Email</p>
-                <span className="value">cipherghost68@gmail.com</span>
+                <span className="value">brighttechsolutionssupport@gmail.com</span>
               </div>
             </div>
 
@@ -171,7 +257,7 @@ function Contact() {
               </div>
               <div>
                 <p className="label">Working Hours</p>
-                <span className="value">Mon - Fri 8:00AM - 6:00PM</span>
+                <span className="value">Mon - Fri 8:00AM - 6:00PM EAT</span>
               </div>
             </div>
           </div>
@@ -190,7 +276,7 @@ function Contact() {
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
           <h4>Send a Message</h4>
           <h2>Let's Work Together</h2>
           <p className="form-subtitle">
@@ -199,30 +285,88 @@ function Contact() {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="name">Full Name</label>
+              <label htmlFor="name">Full Name <span aria-hidden="true">*</span></label>
               <input
                 type="text"
                 id="name"
-                placeholder="Your name"
+                placeholder="Your full name"
                 value={formData.name}
                 onChange={handleChange}
                 className={errors.name ? 'error' : ''}
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? 'name-error' : undefined}
+                autoComplete="name"
               />
-              {errors.name && <span className="error-message">{errors.name}</span>}
+              {errors.name && <span id="name-error" className="error-message" role="alert">{errors.name}</span>}
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="email">Email Address <span aria-hidden="true">*</span></label>
               <input
                 type="email"
                 id="email"
-                placeholder="Your email"
+                placeholder="your@email.com"
                 value={formData.email}
                 onChange={handleChange}
                 className={errors.email ? 'error' : ''}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'email-error' : undefined}
+                autoComplete="email"
               />
-              {errors.email && <span className="error-message">{errors.email}</span>}
+              {errors.email && <span id="email-error" className="error-message" role="alert">{errors.email}</span>}
             </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="+254 700 000 000"
+                value={formData.phone}
+                onChange={handleChange}
+                className={errors.phone ? 'error' : ''}
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? 'phone-error' : undefined}
+                autoComplete="tel"
+              />
+              {errors.phone && <span id="phone-error" className="error-message" role="alert">{errors.phone}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="service">Service Needed <span aria-hidden="true">*</span></label>
+              <select
+                id="service"
+                value={formData.service}
+                onChange={handleChange}
+                className={errors.service ? 'error' : ''}
+                aria-invalid={!!errors.service}
+                aria-describedby={errors.service ? 'service-error' : undefined}
+              >
+                {serviceOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              {errors.service && <span id="service-error" className="error-message" role="alert">{errors.service}</span>}
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="budget">Budget Range</label>
+            <select
+              id="budget"
+              value={formData.budget}
+              onChange={handleChange}
+            >
+              {budgetOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
@@ -230,37 +374,41 @@ function Contact() {
             <input
               type="text"
               id="subject"
-              placeholder="Project Inquiry"
+              placeholder="Brief subject line"
               value={formData.subject}
               onChange={handleChange}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="message">Message</label>
+            <label htmlFor="message">Message <span aria-hidden="true">*</span></label>
             <textarea
               id="message"
               rows="5"
-              placeholder="Tell us about your project..."
+              placeholder="Tell us about your project, goals, and timeline..."
               value={formData.message}
               onChange={handleChange}
               className={errors.message ? 'error' : ''}
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? 'message-error' : undefined}
             ></textarea>
-            {errors.message && <span className="error-message">{errors.message}</span>}
+            {errors.message && <span id="message-error" className="error-message" role="alert">{errors.message}</span>}
           </div>
 
-          {sendError && <span className="error-message">{sendError}</span>}
+          {sendError && <span className="error-message" role="alert">{sendError}</span>}
 
           <button
             type="submit"
             className="btn-primary"
             disabled={isSending || submitted}
           >
-            {isSending ? <Spinner /> : submitted ? '✓ Sent!' : 'Send Message'}
+            {isSending ? <Spinner /> : submitted ? 'Message Sent!' : 'Send Message'}
           </button>
 
           {submitted && (
-            <div className="success-message">✅ Thank you! We'll get back to you soon.</div>
+            <div className="success-message" role="status">
+              Thank you! We'll get back to you within 24 hours. Check your inbox for a confirmation email.
+            </div>
           )}
         </form>
       </div>

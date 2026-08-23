@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import chatbotImage from '../assets/images/chatbot.jfif';
+import ecommerceImage from '../assets/images/e-commerce.jfif';
+import fintechImage from '../assets/images/fintech.jfif';
+import realEstateImage from '../assets/images/real-estate.jfif';
+import socialMediaImage from '../assets/images/digital-marketting.jfif';
+import healthAppImage from '../assets/images/health-app.jfif';
 
 function Projects() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -7,74 +13,58 @@ function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Website',
+      title: 'E-Commerce Platform',
       category: 'Web Development',
       categorySlug: 'web',
-      image:
-        'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=80',
-      description:
-        'A complete e-commerce platform with payment integration and inventory management.',
-      demo: '#',
-      caseStudy: '#',
+      image: ecommerceImage,
+      description: 'Full-featured online store with seamless payments and inventory management.',
+      technologies: ['React', 'Node.js', 'Stripe']
     },
     {
       id: 2,
       title: 'Fintech Mobile App',
       category: 'Mobile App',
       categorySlug: 'mobile',
-      image:
-        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop&q=80',
-      description:
-        'A secure mobile banking app with real-time transaction tracking and analytics.',
-      demo: '#',
-      caseStudy: '#',
+      image: fintechImage,
+      description: 'Secure banking app with real-time transactions and biometric authentication.',
+      technologies: ['React Native', 'Firebase', 'Node.js']
     },
     {
       id: 3,
       title: 'Real Estate Platform',
       category: 'Web Development',
       categorySlug: 'web',
-      image:
-        'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop&q=80',
-      description:
-        'A comprehensive real estate platform with property listings and virtual tours.',
-      demo: '#',
-      caseStudy: '#',
+      image: realEstateImage,
+      description: 'Property listing platform with virtual tours and agent dashboards.',
+      technologies: ['Next.js', 'PostgreSQL', 'Mapbox']
     },
     {
       id: 4,
-      title: 'AI Chatbot',
+      title: 'AI Chatbot Assistant',
       category: 'Web Development',
       categorySlug: 'web',
-      image:
-        'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=400&fit=crop&q=80',
-      description: 'An AI-powered chatbot with natural language processing and 24/7 support.',
-      demo: '#',
-      caseStudy: '#',
+      image: chatbotImage,
+      description: 'Intelligent chatbot with NLP and multi-language support.',
+      technologies: ['Python', 'OpenAI', 'React']
     },
     {
       id: 5,
-      title: 'Health Tracking App',
+      title: 'Health & Wellness App',
       category: 'Mobile App',
       categorySlug: 'mobile',
-      image:
-        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop&q=80',
-      description:
-        'A health tracking app with real-time monitoring and personalized insights.',
-      demo: '#',
-      caseStudy: '#',
+      image: healthAppImage,
+      description: 'Health tracking app with real-time monitoring and personalized insights.',
+      technologies: ['Flutter', 'Firebase', 'HealthKit']
     },
     {
       id: 6,
       title: 'Social Media Dashboard',
-      category: 'Marketing',
+      category: 'Digital Marketing',
       categorySlug: 'marketing',
-      image:
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80',
-      description: 'A powerful social media analytics dashboard with automated reporting.',
-      demo: '#',
-      caseStudy: '#',
-    },
+      image: socialMediaImage,
+      description: 'Analytics dashboard with automated reporting and campaign tracking.',
+      technologies: ['React', 'D3.js', 'Node.js']
+    }
   ];
 
   const handleImageLoad = (id) => {
@@ -92,13 +82,12 @@ function Projects() {
     { id: 'all', label: 'All Projects' },
     { id: 'web', label: 'Web Development' },
     { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'marketing', label: 'Marketing' },
+    { id: 'marketing', label: 'Digital Marketing' }
   ];
 
-  const filteredProjects =
-    activeFilter === 'all'
-      ? projects
-      : projects.filter((p) => p.categorySlug === activeFilter);
+  const filteredProjects = activeFilter === 'all'
+    ? projects
+    : projects.filter((p) => p.categorySlug === activeFilter);
 
   return (
     <section className="section projects-section" id="projects">
@@ -107,7 +96,7 @@ function Projects() {
         <h2 className="section-title">
           Featured <span>Projects</span>
         </h2>
-        <p className="section-subtitle">Here are some of our featured projects we've worked on</p>
+        <p className="section-subtitle">Some of our recent work and success stories</p>
       </div>
 
       <div className="filter-links">
@@ -116,6 +105,7 @@ function Projects() {
             key={filter.id}
             className={`filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
             onClick={() => setActiveFilter(filter.id)}
+            aria-pressed={activeFilter === filter.id}
           >
             {filter.label}
           </button>
@@ -133,43 +123,36 @@ function Projects() {
                 className={loadedImages[project.id] ? 'loaded' : ''}
                 onLoad={() => handleImageLoad(project.id)}
               />
-              <div className="project-overlay">
-                <span className="project-category">{project.category}</span>
-              </div>
+              <span className="project-category-badge">{project.category}</span>
             </div>
+            
             <div className="project-content">
-              <h5>{project.title}</h5>
+              <h4>{project.title}</h4>
               <p>{project.description}</p>
-              <div className="project-links">
-                <a
-                  href={project.demo}
-                  className="project-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('contact');
-                  }}
-                >
-                  Live Demo →
-                </a>
-                <a
-                  href={project.caseStudy}
-                  className="project-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('contact');
-                  }}
-                >
-                  Case Study
-                </a>
+              
+              <div className="project-tech-stack">
+                {project.technologies.map((tech, index) => (
+                  <span key={index} className="tech-pill">{tech}</span>
+                ))}
               </div>
+              
+              <button 
+                className="project-cta"
+                onClick={() => handleScrollTo('contact')}
+              >
+                View Project →
+              </button>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="projects-cta">
-        <button className="btn-secondary" onClick={() => handleScrollTo('contact')}>
-          View All Projects
+      <div className="projects-cta-wrapper">
+        <button 
+          className="btn-primary" 
+          onClick={() => handleScrollTo('contact')}
+        >
+          Let's Build Your Project
         </button>
       </div>
     </section>
