@@ -23,7 +23,7 @@ function Contact() {
   const EMAILJS_SERVICE_ID = 'service_vi1ebq8';
   const EMAILJS_AUTO_REPLY_TEMPLATE = 'template_1d2jq8l';      // Auto-reply to client
   const EMAILJS_ADMIN_TEMPLATE = 'template_qabttpj';     // Admin notification
-  const EMAILJS_PUBLIC_KEY = 'FhqqTT9yKQ5GhVBdZ';
+  const EMAILJS_PUBLIC_KEY = 'iYyAgmeLF0DXtjSd7';
 
   const ADMIN_EMAIL = 'brighttechsolutionssupport@gmail.com';
 

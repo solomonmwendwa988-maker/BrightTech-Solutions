@@ -11,10 +11,10 @@ function Newsletter() {
   // ============================================================
   // YOUR EMAILJS CREDENTIALS
   // ============================================================
-  const EMAILJS_SERVICE_ID = 'service_vi1ebq8';
-  const EMAILJS_WELCOME_TEMPLATE = 'template_1d2jq8l';
-  const EMAILJS_ADMIN_TEMPLATE = 'template_qabttpj';
-  const EMAILJS_PUBLIC_KEY = 'ApN9IVsJBrmDi648o';
+  const EMAILJS_SERVICE_ID = 'service_vsdq8';
+  const EMAILJS_WELCOME_TEMPLATE = 'templdsaste_1d2jq8l';
+  const EMAILJS_ADMIN_TEMPLATE = 'templatasase_qabttpj';
+  const EMAILJS_PUBLIC_KEY = 'ApN9IVasrfrwsJBrmDi648o';
 
   // Admin email where notifications will be sent
   // This matches your template's "To Email" field
