@@ -1,3 +1,4 @@
+// src/pages/Home.jsx
 import { useState } from 'react';
 import Nav from '../components/Nav.jsx';
 import Hero from '../components/Hero.jsx';
@@ -8,6 +9,8 @@ import Footer from '../components/Footer.jsx';
 import Contact from './Contact.jsx';
 import Blog from './Blog.jsx';
 import Newsletter from './Newsletter.jsx';
+import BackToTop from '../components/BackToTop.jsx';
+import PrivacyBanner from '../components/PrivacyBanner.jsx';
 import homeImage from '../assets/images/home.jpeg';
 
 function Home() {
@@ -29,7 +32,7 @@ function Home() {
         <div className="choose-us-content">
           <span className="section-badge">WHY CHOOSE US</span>
           <h2>
-            Why Businesses <span>Choose BrightTech</span>
+            Why Businesses <span>Choose Sigma Cipher</span>
           </h2>
           <p>
             We combine creativity, technology, and strategy to deliver exceptional results that
@@ -49,7 +52,7 @@ function Home() {
         <div className="choose-us-image">
           <img
             src={homeImage}
-            alt="BrightTech Solutions team collaborating on a project"
+            alt="Sigma Cipher Technologies team collaborating on a project"
             loading="lazy"
             className={imageLoaded ? 'loaded' : ''}
             onLoad={() => setImageLoaded(true)}
@@ -65,7 +68,10 @@ function Home() {
       <Contact />
       <Footer />
 
-      {/* Floating WhatsApp Button - Updated with realistic availability */}
+      <BackToTop />
+      <PrivacyBanner />
+
+      {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/254713125845"
         target="_blank"

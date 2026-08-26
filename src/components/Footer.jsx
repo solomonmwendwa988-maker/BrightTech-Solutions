@@ -14,8 +14,8 @@ function Footer() {
     <footer className="footer">
       <div className="footer-brand">
         <div className="footer-brand-logo">
-          <img src={logoImage} alt="BrightTech Solutions" />
-          <h3>BrightTech</h3>
+          <img src={logoImage} alt="Sigma Cipher Technologies" />
+          <h3>Sigma Cipher</h3>
         </div>
         <span className="footer-tagline">Empowering Digital Growth</span>
         <p>We help businesses grow with innovative technology and creative digital solutions. Let's build something amazing together.</p>
@@ -173,7 +173,7 @@ function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>© {currentYear} BrightTech Solutions. All Rights Reserved.</p>
+        <p>© {currentYear} Sigma Cipher Technologies. All Rights Reserved.</p>
         <div className="footer-bottom-links">
           <a href="#">Privacy Policy</a>
           <span>|</span>

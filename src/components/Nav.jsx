@@ -1,3 +1,4 @@
+// src/components/Nav.jsx
 import { useState, useEffect } from 'react';
 import logoImage from '../assets/images/logo.jpeg';
 
@@ -51,8 +52,7 @@ function Nav() {
     { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
     { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
-    { id: 'blog', label: 'Blog' }, // Add this
+    { id: 'blog', label: 'Blog' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -68,8 +68,8 @@ function Nav() {
   return (
     <nav className={`navBar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navBar-section">
-        <img src={logoImage} alt="BrightTech Solutions Logo" />
-        <h3>BrightTech Solutions</h3>
+        <img src={logoImage} alt="Sigma Cipher Technologies Logo" />
+        <h3>Sigma Cipher</h3>
       </div>
 
       <div className={`navBar-section nav-links ${menuOpen ? 'active' : ''}`}>

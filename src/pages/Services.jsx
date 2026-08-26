@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ScrollAnimation from '../components/ScrollAnimation.jsx';
 
 function Services() {
   const [hoveredService, setHoveredService] = useState(null);
@@ -91,41 +92,42 @@ function Services() {
       </div>
 
       <div className="services-grid">
-        {services.map((service) => (
-          <div 
-            key={service.id} 
-            className="service-card"
-            onMouseEnter={() => setHoveredService(service.id)}
-            onMouseLeave={() => setHoveredService(null)}
-          >
-            <div className="service-icon-wrapper">
-              {service.icon}
-            </div>
-            
-            <h3>{service.title}</h3>
-            
-            <p className="service-description">{service.description}</p>
-            
-            <div className="service-technologies">
-              {service.technologies.map((tech, index) => (
-                <span key={index} className="tech-tag">{tech}</span>
-              ))}
-            </div>
-
-            <a 
-              href="#contact" 
-              className="service-link"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('contact');
-              }}
+        {services.map((service, index) => (
+          <ScrollAnimation key={service.id} delay={index * 100}>
+            <div 
+              className="service-card"
+              onMouseEnter={() => setHoveredService(service.id)}
+              onMouseLeave={() => setHoveredService(null)}
             >
-              Learn More
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
+              <div className="service-icon-wrapper">
+                {service.icon}
+              </div>
+              
+              <h3>{service.title}</h3>
+              
+              <p className="service-description">{service.description}</p>
+              
+              <div className="service-technologies">
+                {service.technologies.map((tech, index) => (
+                  <span key={index} className="tech-tag">{tech}</span>
+                ))}
+              </div>
+
+              <a 
+                href="#contact" 
+                className="service-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScrollTo('contact');
+                }}
+              >
+                Learn More
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+          </ScrollAnimation>
         ))}
       </div>
 

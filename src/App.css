@@ -4750,3 +4750,526 @@ img.loaded {
     transition: none !important;
   }
 }
+
+/* ===========================================================
+   BACK TO TOP BUTTON
+=========================================================== */
+
+.back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-gradient, linear-gradient(135deg, #2563eb, #1d4ed8));
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.back-to-top.visible {
+    display: flex;
+    animation: fadeInUp 0.3s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.45);
+}
+
+.back-to-top:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 80px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-to-top {
+        bottom: 70px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
+/* ===========================================================
+   SCROLL ANIMATIONS
+=========================================================== */
+
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================================================
+   COOKIE CONSENT BANNER
+=========================================================== */
+
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+    flex-wrap: wrap;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cookie-banner p {
+    margin: 0;
+    font-size: 14px;
+    color: #94a3b8;
+    flex: 1;
+}
+
+.cookie-banner p a {
+    color: #60a5fa;
+    text-decoration: underline;
+}
+
+.cookie-banner .btn-cookie {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.cookie-banner .btn-cookie.accept {
+    background: var(--primary-gradient);
+    color: #ffffff;
+}
+
+.cookie-banner .btn-cookie.accept:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.cookie-banner .btn-cookie.decline {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid #475569;
+}
+
+.cookie-banner .btn-cookie.decline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    
+    .cookie-banner .btn-cookie {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-animate {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .back-to-top {
+        transition: none !important;
+    }
+}
+
+/* ===========================================================
+   PRIVACY BANNER (formerly Cookie Banner)
+=========================================================== */
+
+.privacy-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    z-index: 1001;
+    flex-wrap: wrap;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.privacy-banner p {
+    margin: 0;
+    font-size: 14px;
+    color: #94a3b8;
+    flex: 1;
+}
+
+.privacy-banner p a {
+    color: #60a5fa;
+    text-decoration: underline;
+}
+
+.privacy-banner .btn-consent {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.privacy-banner .btn-consent.accept {
+    background: var(--primary-gradient);
+    color: #ffffff;
+}
+
+.privacy-banner .btn-consent.accept:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.privacy-banner .btn-consent.decline {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid #475569;
+}
+
+.privacy-banner .btn-consent.decline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .privacy-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    
+    .privacy-banner .btn-consent {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* ===========================================================
+   SIGMA CIPHER TECHNOLOGIES - ADDITIVE STYLES
+   These styles enhance the hero section and brand identity
+   without removing or overriding existing styles.
+=========================================================== */
+
+/* Hero Trust Line - New element */
+.hero-trust-line {
+    font-size: 0.95rem;
+    color: var(--gray);
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    margin-top: 12px;
+    animation: fadeInUp 1.2s ease;
+    opacity: 0.8;
+}
+
+/* Enhanced Hero Typography */
+.heroSection-description h1 {
+    font-size: 3.8rem;
+    letter-spacing: -1.5px;
+}
+
+.heroSection-description h2 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+}
+
+.heroSection-description h2 span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    max-width: 550px;
+}
+
+/* Enhanced CTA Buttons in Hero */
+.heroSection-buttons .services-btn {
+    padding: 16px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    background: var(--primary-gradient);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.heroSection-buttons .services-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.heroSection-buttons .services-btn:hover::before {
+    left: 100%;
+}
+
+.heroSection-buttons .services-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 35px rgba(37, 99, 235, 0.45);
+}
+
+.heroSection-buttons .contact-btn {
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-width: 2px;
+}
+
+.heroSection-buttons .contact-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+}
+
+/* Enhanced Badge in Hero */
+.heroSection-description .section-badge {
+    font-size: 0.75rem;
+    padding: 8px 24px;
+    letter-spacing: 3px;
+    background: rgba(37, 99, 235, 0.06);
+    border-color: rgba(37, 99, 235, 0.15);
+    font-weight: 800;
+}
+
+/* Hero Stats - Enhanced */
+.hero-stats {
+    padding: 18px 28px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.hero-stat .stat-number {
+    font-size: 1.4rem;
+}
+
+.hero-stat .stat-label {
+    font-size: 0.8rem;
+}
+
+/* Hero Image Badge - Enhanced */
+.hero-image-badge .badge-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--primary-gradient);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.9rem;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+    .heroSection-description h1 {
+        font-size: 2.8rem;
+    }
+    
+    .heroSection-description h2 {
+        font-size: 1.2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .hero-trust-line {
+        font-size: 0.85rem;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .heroSection-description h1 {
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+    }
+    
+    .heroSection-description h2 {
+        font-size: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+    }
+    
+    .heroSection-buttons .services-btn {
+        padding: 14px 32px;
+        font-size: 0.9rem;
+    }
+    
+    .heroSection-buttons .contact-btn {
+        padding: 12px 28px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-trust-line {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        margin-top: 8px;
+    }
+    
+    .hero-stats {
+        padding: 14px 20px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Responsive - Small Phones */
+@media (max-width: 480px) {
+    .heroSection-description h1 {
+        font-size: 1.8rem;
+    }
+    
+    .heroSection-description h2 {
+        font-size: 0.9rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .hero-trust-line {
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .heroSection-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .heroSection-buttons .services-btn,
+    .heroSection-buttons .contact-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .hero-stat-divider {
+        display: none;
+    }
+}
+
+/* Navbar Brand - Enhanced */
+.navBar-section h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Footer Brand - Enhanced */
+.footer-brand .footer-brand-logo h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--white), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Smooth animations for hero elements */
+.heroSection-description .section-badge,
+.heroSection-description h1,
+.heroSection-description h2,
+.hero-description,
+.hero-stats,
+.heroSection-buttons,
+.hero-trust-line,
+.quick-data {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.heroSection-description .section-badge { animation-delay: 0.1s; }
+.heroSection-description h1 { animation-delay: 0.2s; }
+.heroSection-description h2 { animation-delay: 0.3s; }
+.hero-description { animation-delay: 0.4s; }
+.hero-stats { animation-delay: 0.5s; }
+.heroSection-buttons { animation-delay: 0.6s; }
+.hero-trust-line { animation-delay: 0.7s; }
+.quick-data { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
