@@ -262,18 +262,18 @@ function Contact() {
             </div>
           </div>
 
-          <div className="map-container">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35853743783!2d36.68219783056679!3d-1.302861107826756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2s!4v1700000000000"
-              width="100%"
-              height="250"
-              style={{ border: 0, borderRadius: '12px' }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="BrightTech Solutions Location"
-            ></iframe>
-          </div>
+         <div className="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.776603739371!2d35.1353555!3d-0.4327388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182af952a4f0a645%3A0xb173ef6fca4bb197!2sUniversity%20of%20Kabianga!5e0!3m2!1sen!2ske!4v1726789123456"
+            width="100%"
+            height="250"
+            style={{ border: 0, borderRadius: '12px' }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="BrightTech Solutions - University of Kabianga, Belgut, Kericho, Kenya"
+          ></iframe>
+        </div>
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit} noValidate>
