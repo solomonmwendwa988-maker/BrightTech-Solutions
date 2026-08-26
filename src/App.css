@@ -2202,6 +2202,12 @@ ul {
         min-height: auto;
     }
 
+      html {
+        font-size: 14px;
+        overflow-x: hidden;
+        width: 100%;
+    }
+
     .heroSection-description .section-badge {
         align-self: center;
     }
